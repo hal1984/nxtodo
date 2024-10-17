@@ -1,4 +1,3 @@
-import { MockTodoDataSource } from "../data/datasources/MockTodoDataSource";
 import { RealTodoDataSource } from "../data/datasources/RealTodoDataSource";
 import { TodoRepositoryImpl } from "../data/repositories/TodoRepositoryImpl";
 import { TodoRepository } from "../domain/repositories/TodoRepository";

@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@models": ["models/Todo.ts"],
+      "@nxtodo/apiInterface": ["libs/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

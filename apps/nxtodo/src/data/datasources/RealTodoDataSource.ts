@@ -1,7 +1,7 @@
 // RealTodoDataSource.ts
 import { ITodoDataSource } from './ITodoDataSource';
 import { Todo as DomainTodo } from '../../domain/entities/Todo';
-import { Todo as ApiTodo } from '@models';
+import { Todo as ApiTodo } from '@nxtodo/apiInterface';
 import axios from 'axios';
 
 export class RealTodoDataSource implements ITodoDataSource {
