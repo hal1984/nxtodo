@@ -1,0 +1,26 @@
+{
+  "name": "todo-nest-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/todo-nest-app/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "todo-nest-app:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "todo-nest-app:build:development"
+        },
+        "production": {
+          "buildTarget": "todo-nest-app:build:production"
+        }
+      }
+    }
+  }
+}
