@@ -20,7 +20,7 @@ export type TodoInsert = InferInsertModel<typeof todos>;
 export function mapTodoToApiTodo(todo: TodoSelect): ApiTodo {
   return {
     id: todo.id.toString(),
-    text: todo.text,
-    completed: todo.completed,
+    text: todo.text ?? '',
+    completed: todo.completed ?? false,
   };
 }

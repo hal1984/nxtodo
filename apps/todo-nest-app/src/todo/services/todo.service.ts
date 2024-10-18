@@ -14,7 +14,11 @@ export class TodoService {
     const newTodo: TodoInsert = { text, completed: false};
     console.log('newTodo', newTodo);
     const createdTodos = await this.drizzleService.db.insert(databaseSchema.todos).values(newTodo).returning();
-    return mapTodoToApiTodo(createdTodos.pop());
+    const createdTodo = createdTodos.pop();
+    if (!createdTodo) {
+      throw new Error('Failed to create todo');
+    }
+    return mapTodoToApiTodo(createdTodo);
   }
 
   async getTodos(): Promise<ApiTodo[]> {
@@ -28,15 +32,22 @@ export class TodoService {
 
   async toggleTodo(id: string): Promise<ApiTodo> {
     const todos = await this.drizzleService.db.select().from(databaseSchema.todos).where(eq(databaseSchema.todos.id, +id));
-    if (todos.length === 0) {
+    const todo = todos.pop();
+
+    if (!todo) {
       throw new Error('Todo not found');
     }
-    const todo = todos.pop();
 
     const updatedTodos = await this.drizzleService.db.update(databaseSchema.todos).set({
       completed: !todo.completed,
       updatedAt: new Date()
     }).where(eq(databaseSchema.todos.id, +id)).returning();
-    return mapTodoToApiTodo(updatedTodos.pop());
+
+    const updatedTodo = updatedTodos.pop();
+    if (!updatedTodo) {
+      throw new Error('Failed to update todo');
+    }
+
+    return mapTodoToApiTodo(updatedTodo);
   }
 }

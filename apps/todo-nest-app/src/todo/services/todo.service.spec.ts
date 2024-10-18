@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 
 import { TodoService } from './todo.service';
 import { DrizzleService } from '../../database/drizzle.service';
-import { databaseSchema, mapTodoToApiTodo } from '../../database/database-schema';
+import { databaseSchema, mapTodoToApiTodo, TodoSelect } from '../../database/database-schema';
 import { TodoInsert } from '../../database/database-schema';
 
 
@@ -49,7 +49,7 @@ describe('TodoService', () => {
 
   describe('getTodos', () => {
     it('should return a list of todos', async () => {
-      const todos = [{ id: 1, text: 'Test Todo', completed: false }];
+      const todos = [{ id: 1, text: 'Test Todo', completed: false }] as TodoSelect[];
       jest.spyOn(drizzleService.db, 'select').mockReturnValue({
         from: jest.fn().mockResolvedValue(todos),
       } as any);
