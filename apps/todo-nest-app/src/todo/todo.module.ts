@@ -22,11 +22,6 @@ import { DatabaseModule } from '../database/database.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        console.log('configService.get("POSTGRES_HOST")', configService.get('POSTGRES_HOST'));
-        console.log('configService.get("POSTGRES_PORT")', configService.get('POSTGRES_PORT'));
-        console.log('configService.get("POSTGRES_USER")', configService.get('POSTGRES_USER'));
-        console.log('configService.get("POSTGRES_DB")', configService.get('POSTGRES_DB'));
-        console.log('configService.get("POSTGRES_SSL")', configService.get('POSTGRES_SSL'));
         return ({
           host: configService.get('POSTGRES_HOST') ?? '',
           port: configService.get('POSTGRES_PORT') ?? 0,
