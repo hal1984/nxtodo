@@ -28,12 +28,12 @@ import { DatabaseModule } from '../database/database.module';
         console.log('configService.get("POSTGRES_DB")', configService.get('POSTGRES_DB'));
         console.log('configService.get("POSTGRES_SSL")', configService.get('POSTGRES_SSL'));
         return ({
-          host: configService.get('POSTGRES_HOST'),
-          port: configService.get('POSTGRES_PORT'),
-          user: configService.get('POSTGRES_USER'),
-          password: configService.get('POSTGRES_PASSWORD'),
-          database: configService.get('POSTGRES_DB'),
-          ssl: configService.get('POSTGRES_SSL'),
+          host: configService.get('POSTGRES_HOST') ?? '',
+          port: configService.get('POSTGRES_PORT') ?? 0,
+          user: configService.get('POSTGRES_USER') ?? '',
+          password: configService.get('POSTGRES_PASSWORD') ?? '',
+          database: configService.get('POSTGRES_DB') ?? '',
+          ssl: configService.get('POSTGRES_SSL') ?? false,
         });
       },
     }),
