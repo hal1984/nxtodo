@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: nx-nestjs-postgres
+    image: postgres:latest
+    env_file:
+      - docker.env
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    container_name: nx-nestjs-pgadmin
+    image: dpage/pgadmin4:latest
+    env_file:
+      - docker.env
+    ports:
+      - "8080:80"
+    depends_on:
+      - db

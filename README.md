@@ -41,6 +41,8 @@ Nxtodo is a TODO list application developed in React, using Zustand for state ma
 - **Clean Architecture**: Software architecture that promotes separation of concerns and facilitates code maintenance and scalability.
 - **Nx**: Tool for managing monorepositories that simplifies organization and task execution in large projects.
 - **NestJS**: A framework for building efficient, reliable, and scalable server-side applications.
+- **Docker**: Platform for developing, shipping, and running applications inside containers.
+- **Drizzle**: ORM for TypeScript and JavaScript that simplifies database interactions.
 
 ## Project Structure
 
@@ -57,6 +59,8 @@ This workspace has the following structure:
 - `apps/nxtodo-e2e/`: End-to-end tests for the main application.
 - `apps/todo-nest-app/`: Source code for the NestJS API.
 - `apps/todo-nest-app-e2e/`: End-to-end tests for the NestJS API.
+- `docker-compose.yml`: Docker Compose configuration for setting up the development environment.
+- `drizzle.config.ts`: Configuration file for Drizzle ORM.
 - `eslint.config.js`: Configuration file for ESLint.
 - `jest.config.ts`: Configuration file for Jest.
 - `jest.preset.js`: Jest preset configuration.
@@ -73,18 +77,27 @@ To start developing, follow these steps:
     ```sh
     npm install
     ```
-
-2. **Run the NestJS server**:
+2. **Start Docker Compose to launch Postgresql**:
     ```sh
-    npx nx serve todo-nest-app
+    npm run docker:compose
     ```
 
-3. **Run the Vite development server**:
+3. **Generate first migration**:
     ```sh
-    npx nx serve nxtodo
+    npm run drizzle:generate
     ```
 
-3. **Run tests**:
+4. **Apply first migration**:
+    ```sh
+    npm run drizzle:migrate
+    ```
+
+5. **Run development servers**:
+    ```sh
+    npm run start
+    ```
+
+6. **Run tests**:
     ```sh
     npx nx test nxtodo
     ```
@@ -92,7 +105,7 @@ To start developing, follow these steps:
     npx nx test todo-nest-app
     ```
 
-4. **Run end-to-end tests**:
+7. **Run end-to-end tests**:
     ```sh
     npx nx e2e nxtodo-e2e
     ```
@@ -130,7 +143,39 @@ npx prettier --write .
 
 ## CI/CD
 
-This project uses GitHub Actions for Continuous Integration. The configuration can be found in [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+This project uses GitHub Actions for Continuous Integration. The configuration can be found in 
+
+ci.yml
+
+.
+
+## Docker
+
+This project uses Docker to manage the development environment. The 
+
+docker-compose.yml
+
+ file sets up a PostgreSQL database for the application. To start the Docker containers, run:
+
+```sh
+npm run docker:compose
+```
+
+## Drizzle ORM
+
+Drizzle ORM is used for database interactions. To generate and apply migrations, use the following commands:
+
+Generate a new migration:
+
+```sh
+npm run drizzle:generate
+```
+
+Apply the migrations:
+
+```sh
+npm run drizzle:migrate
+```
 
 ## Install Nx Console
 
@@ -159,9 +204,3 @@ For more information about Nx, visit the [Nx Documentation](https://nx.dev).
 
 Happy coding!
 ```
-
-This 
-
-README.md
-
- file provides a comprehensive guide on how to work with the project, including the project structure, useful commands, and a detailed description of the technologies used.
